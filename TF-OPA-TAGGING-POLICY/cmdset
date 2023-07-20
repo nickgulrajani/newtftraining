@@ -1,0 +1,8 @@
+
+
+terraform init 
+terraform plan -out azurepolicy.plan
+terraform show -json azurepolicy.plan > azurepolicy.json
+cat azurepolicy.json | jq -r '.resource_changes[] | [.change.actions[], .type, .change.after.name, (.change.after.tags | tostring)] | @tsv'
+
+opa eval --data enforce_tagging.rego -i main.tf "data.azurepolicy.allow"
