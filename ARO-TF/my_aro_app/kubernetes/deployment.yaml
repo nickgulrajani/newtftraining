@@ -1,0 +1,21 @@
+# kubernetes/deployment.yaml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-aro-app-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-aro-app
+  template:
+    metadata:
+      labels:
+        app: my-aro-app
+    spec:
+      containers:
+        - name: my-aro-app-container
+          image: "${var.container_image}"
+          ports:
+            - containerPort: 80
