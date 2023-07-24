@@ -4,46 +4,59 @@ and settings for your ARO deployment, including the required container images,
 environment variables, and other resources your application needs.
 
 Create a Terraform configuration: Create a new Terraform project or add the ARO deployment
-configuration to an existing project. You'll define the resources and settings required 
+configuration to an existing project. 
+
+You'll define the resources and settings required 
 to deploy your application to the worker nodes.
 
 Define worker node resources: Within your Terraform configuration, define the resources necessary 
-to create and configure the worker nodes. This might include virtual machines, networking components,
+to create and configure the worker nodes. 
+
+This might include virtual machines, networking components,
 and any other required resources.
 
 Use a Provisioner: Terraform has provisioners that allow you to execute scripts or configuration 
-management tools on the newly created resources. You can use a provisioner to deploy your ARO 
+management tools on the newly created resources. 
+
+You can use a provisioner to deploy your ARO 
 application onto the worker nodes once they are provisioned.
 
 Remote-exec provisioner: Since ARO is likely to be a managed Kubernetes service, 
 you might use a "remote-exec" provisioner in Terraform to connect to the worker nodes and 
-execute commands to install and configure your application. For this, you'll need to have SSH access or another method to run commands on the worker nodes.
+execute commands to install and configure your application.
+
+For this, you'll need to have SSH access or another method to run commands on the worker nodes.
 
 Use Kubernetes manifests: Alternatively, instead of using remote-exec, you can use Kubernetes
- manifests (YAML files) that define your application's deployment, services, and other resources.
+manifests (YAML files) that define your application's deployment, services, and other resources.
 Terraform has a Kubernetes provider that can be used to apply these manifests to your ARO cluster.
 
-Handle secrets securely: When deploying applications, it's crucial to handle sensitive information securely. Use Kubernetes secrets or other secure methods to manage secrets like passwords, API keys, or other credentials.
+Handle secrets securely: When deploying applications, it's crucial to handle sensitive information securely. 
+
+Use Kubernetes secrets or other secure methods to manage secrets like passwords, API keys, or other credentials.
 
 Apply the Terraform configuration: Run terraform init, terraform plan, and terraform apply to deploy
-your ARO configuration to the worker nodes. Terraform will create the necessary resources and apply the
-configuration to the worker nodes.
+your ARO configuration to the worker nodes. 
 
+Terraform will create the necessary resources and apply the
+configuration to the worker nodes.
 
 Please note that the example assumes you have previously set up the Azure Red Hat
 OpenShift (ARO) cluster and have access to the kubeconfig file for the ARO cluster. 
  
- 
 The provider.tf file only configures Terraform to use the necessary providers to manage Azure resources 
- and deploy Kubernetes resources.
+and deploy Kubernetes resources.
 
 
  ADDITIONAL NOTES 
 
  In this example, Terraform provisions an ARO cluster, connects to it using the Kubernetes provider, 
- and applies the Kubernetes Deployment and Service manifests to deploy your application to the worker nodes.
-  Remember to replace "your-container-registry-url/your-container-image:latest" with the actual URL of
-   your container image.
+ and applies the Kubernetes Deployment and Service manifests to deploy your application to 
+ the worker nodes.
+
+
+Remember to replace "your-container-registry-url/your-container-image:latest" with the actual URL of
+your container image.
 
 Run terraform init, terraform plan, and terraform apply to deploy your ARO application 
 to the worker nodes.
