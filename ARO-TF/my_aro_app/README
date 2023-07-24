@@ -54,10 +54,44 @@ and deploy Kubernetes resources.
  and applies the Kubernetes Deployment and Service manifests to deploy your application to 
  the worker nodes.
 
-
 Remember to replace "your-container-registry-url/your-container-image:latest" with the actual URL of
 your container image.
 
 Run terraform init, terraform plan, and terraform apply to deploy your ARO application 
 to the worker nodes.
+
+APP DEPLOYMENT ..
+
+Deploying applications directly to Azure Red Hat OpenShift (ARO) worker nodes using Terraform is  not 
+the most common or recommended approach. 
+
+ARO is a managed Kubernetes service, and it's generally preferred to use standard Kubernetes deployment
+practices instead of interacting with the worker nodes directly.
+
+For deploying applications to a Kubernetes cluster, including ARO, 
+it's recommended to use standard Kubernetes manifests (YAML files) or Helm charts. 
+
+You can use tools like kubectl or Helm to apply these manifests to the cluster, 
+which abstracts the complexities of the underlying infrastructure and ensures consistent 
+and reliable application deployments.
+
+The typical steps for deploying an application to ARO or any Kubernetes cluster are:
+
+Define Kubernetes manifests: Create YAML files that describe your application's deployment, 
+services, and other required resources.
+
+Use kubectl or Helm: Apply the Kubernetes manifests to the ARO cluster using 
+kubectl apply -f <manifest_file> or helm install <release_name> <chart>.
+
+Secrets management: Handle sensitive information like passwords and API keys 
+securely using Kubernetes secrets or other secure methods.
+
+Monitoring and scaling: Consider implementing monitoring and autoscaling solutions 
+to ensure your application performs well under varying loads.
+
+While Terraform can be used to manage the infrastructure surrounding the ARO cluster, 
+such as networking and virtual machines (if you have deployed Kubernetes manually), 
+it's usually not the best choice for directly deploying applications to worker nodes.
+
+
 
