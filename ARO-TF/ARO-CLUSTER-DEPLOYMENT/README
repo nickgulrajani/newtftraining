@@ -1,0 +1,27 @@
+The main.tf file defines the resources that will be created by Terraform. 
+
+It starts by requiring the azurerm and aro providers. 
+
+These providers are used to interact with Azure and Azure RedHat OpenShift, respectively.
+
+The next section of the file defines the azurerm provider. 
+
+This provider is configured with the subscription ID, tenant ID, client ID, and client secret that are used to authenticate with Azure.
+
+The next section of the file defines the aro provider. 
+
+This provider is configured with the subscription ID that is used to authenticate with Azure RedHat OpenShift.
+
+The final section of the file defines the aro_cluster resource. This resource is used to create an Azure RedHat OpenShift cluster. 
+
+The resource is configured with the name, resource group name, domain, master VM size, worker VM size, and worker node count of the cluster.
+
+The output section of the file defines the cluster_name output. This output is used to get the name of the cluster that is created.
+
+The main.tf file is a simple example of how to use Terraform to deploy an Azure RedHat OpenShift cluster.
+
+You can modify the file to fit your specific needs. For example, you can change the name, resource group name, domain, master VM size, worker VM size, and worker node count of the cluster. 
+
+You can also add additional resources to the cluster, such as persistent volumes and load balancers.
+
+
