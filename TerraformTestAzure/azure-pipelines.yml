@@ -1,0 +1,33 @@
+trigger:
+- main
+
+pool:
+  name: Azure Pipelines
+  vmImage: 'windows-latest'
+
+steps:
+- task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@0
+  displayName: 'Use Terraform latest'
+  inputs:
+    terraformVersion: 0.14.3
+
+- task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
+  displayName: 'Terraform : INIT'
+  inputs:
+    backendServiceArm: 'NICK_NEW_SVC_CONNECTION'
+    backendAzureRmResourceGroupName: 'nick-dev-terraform-backend-rg'
+    backendAzureRmStorageAccountName: nicdevterraformbackendsa
+    backendAzureRmContainerName: nick-terraform-backend-files
+    backendAzureRmKey: '************'
+
+- task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
+  displayName: 'Terraform : PLAN'
+  inputs:
+    command: plan
+    environmentServiceNameAzureRM: 'NICK_NEW_SVC_CONNECTION'
+
+- task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV1@0
+  displayName: 'Terraform : APPLY'
+  inputs:
+    command: apply
+    environmentServiceNameAzureRM: 'NICK_NEW_SVC_CONNECTION'
